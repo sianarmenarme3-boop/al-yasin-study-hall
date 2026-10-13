@@ -1,6 +1,6 @@
 const $=id=>document.getElementById(id);let isAdmin=false,adminLockers=[];
 const fa=n=>Number(n).toLocaleString('fa-IR');
-function say(msg,error=false){$('feedback').textContent=msg;$('feedback').classList.toggle('error',error)}
+function say(msg,error=false){const el=$('feedback');if(!el)return;el.textContent=msg;el.classList.toggle('error',error)}
 function updateClock(){const now=new Date();$('clock').textContent=new Intl.DateTimeFormat('fa-IR',{hour:'2-digit',minute:'2-digit',second:'2-digit',hour12:false}).format(now);$('date').textContent=new Intl.DateTimeFormat('fa-IR',{weekday:'long',year:'numeric',month:'long',day:'numeric'}).format(now)}
 setInterval(updateClock,1000);updateClock();
 async function api(url,options={}){const res=await fetch(url,{headers:{'Content-Type':'application/json'},...options});let data={};try{data=await res.json()}catch{}if(!res.ok)throw Error(data.error||'خطایی رخ داد.');return data}
